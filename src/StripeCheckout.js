@@ -23,6 +23,8 @@ type Props = {
   onSuccess: ({ [key: string]: any, checkoutSessionId?: string }) => any,
   /** Called when the Stripe checkout session completes with status 'cancel' */
   onCancel: ({ [key: string]: any }) => any,
+  /** Called when the Stripe checkout session webpage loads successfully */
+  onLoadingComplete?: (syntheticEvent: SyntheticEvent) => any,
   /** Extra options */
   options?: {
     /** The loading item is set on the element with id='sc-loading' */
@@ -53,11 +55,13 @@ const StripeCheckoutWebView = (props: Props) => {
     onSuccess,
     onCancel,
     options,
-    webViewProps,
+    webViewProps = {},
     renderOnComplete,
   } = props;
   /** Holds the complete URL if exists */
   const [completed, setCompleted] = useState(null);
+  /** Holds wether Stripe Checkout has loaded yet */
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   /**
    * Called everytime the URL stats to load in the webview
@@ -89,6 +93,26 @@ const StripeCheckoutWebView = (props: Props) => {
         onCancel(props);
       }
     }
+    /** call webViewProps.onLoadStart */
+    if (webViewProps && webViewProps.onLoadStart) {
+      webViewProps.onLoadStart(syntheticEvent);
+    }
+  };
+
+  /**
+   * Called upon URL load complete
+   */
+  const _onLoadEnd = (syntheticEvent: SyntheticEvent) => {
+    const { nativeEvent } = syntheticEvent;
+    /** set isLoading to false once the stripe checkout page loads */
+    if (!hasLoaded && nativeEvent.url.startsWith('https://checkout.stripe.com') && onLoadingComplete) {
+      setHasLoaded(true);
+      onLoadingComplete(syntheticEvent);
+    }
+    /** call webViewProps.onLoadStart */
+    if (webViewProps && webViewProps.onLoadEnd) {
+      webViewProps.onLoadEnd(syntheticEvent);
+    }
   };
 
   /** If the checkout session is complete -- render the complete content */
@@ -113,6 +137,7 @@ const StripeCheckoutWebView = (props: Props) => {
         ),
       }}
       onLoadStart={_onLoadStart}
+      onLoadEnd={_onLoadEnd}
     />
   );
 };

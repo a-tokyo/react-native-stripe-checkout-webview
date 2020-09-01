@@ -68,6 +68,7 @@ import StripeCheckout from 'react-native-stripe-checkout-webview';
 - `checkoutSessionInput` (Object) - Object to be passed to Stripe's `redirectToCheckout` function. [Docs](https://stripe.com/docs/js/checkout/redirect_to_checkout).
 - `onSuccess` (?Function) - Called upon success of the checkout session with `{ ...props, checkoutSessionId: 'CHECKOUT_SESSION_ID' }`
 - `onCancel` (?Function) - Called upon success of the checkout session with `{ ...props }`
+- `onLoadingComplete` (?Function) - Called when the Stripe checkout session webpage loads successfully.
 - `options` (?Object) - custom options to display content in the webview
   - `htmlContentLoading` (String) - Html string to display a loading indication. - default: `<h1 id="sc-loading">Loading...</h1>` - note: The loading item is set on the element with id='sc-loading'
   - `htmlContentError` (String) - Html string to display stripe errors. - default: `<div id="sc-error-message"></div>` - note: The error is set on the element with id='sc-error-message'
