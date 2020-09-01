@@ -8,6 +8,10 @@
     "url": "https://github.com/A-Tokyo"
   },
   "main": "src/index.js",
+  "files": [
+    "src/",
+    "lib/"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/a-tokyo/react-native-stripe-checkout-webview.git"
