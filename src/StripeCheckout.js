@@ -54,6 +54,7 @@ const StripeCheckoutWebView = (props: Props) => {
     checkoutSessionInput,
     onSuccess,
     onCancel,
+    onLoadingComplete,
     options,
     webViewProps = {},
     renderOnComplete,
