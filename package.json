@@ -1,0 +1,44 @@
+{
+  "name": "react-native-stripe-checkout",
+  "version": "0.0.1",
+  "description": "💰 React Native implementation for Stripe.js Checkout",
+  "author": {
+    "name": "Ahmed Tarek",
+    "email": "ahmed.tokyo1@gmail.com",
+    "url": "https://github.com/A-Tokyo"
+  },
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/a-tokyo/react-native-stripe-checkout.git"
+  },
+  "scripts": {
+    "test": "echo todo"
+  },
+  "keywords": [
+    "react-native",
+    "react-component",
+    "ios",
+    "android",
+    "stripe",
+    "stripe.js",
+    "stripe-sdk",
+    "react-native-stripe",
+    "checkout",
+    "stripe-checkout",
+    "elements",
+    "webview",
+    "types",
+    "flow",
+    "typescript"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/a-tokyo/react-native-stripe-checkout/issues"
+  },
+  "homepage": "https://github.com/a-tokyo/react-native-stripe-checkout#readme",
+  "peerDependencies": {
+    "react-native": "*",
+    "react-native-webview": "*"
+  }
+}
