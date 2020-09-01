@@ -2,15 +2,17 @@
 
 React Native implementation for [Stripe.js Checkout](https://stripe.com/payments/checkout).
 
-<a href="https://npmjs.com/package/react-native-stripe-checkout">
-  <img src="https://img.shields.io/npm/v/react-native-stripe-checkout.svg"></img>
-  <img src="https://img.shields.io/npm/dt/react-native-stripe-checkout.svg"></img>
+<a href="https://npmjs.com/package/react-native-stripe-checkout-webview">
+  <img src="https://img.shields.io/npm/v/react-native-stripe-checkout-webview.svg"></img>
+  <img src="https://img.shields.io/npm/dt/react-native-stripe-checkout-webview.svg"></img>
 </a>
 <a href="https://twitter.com/intent/follow?screen_name=ahmad_tokyo"><img src="https://img.shields.io/twitter/follow/ahmad_tokyo.svg?label=Follow%20@ahmad_tokyo" alt="Follow @ahmad_tokyo"></img></a>
 
 ![](https://i.imgur.com/KL7mfZ8.png)
 
 ```jsx
+import StripeCheckout from 'react-native-stripe-checkout-webview';
+
 const stripeCheckoutComponentProps: {
   stripePublicKey: 'STRIPE_PUBLIC_KEY',
   checkoutSessionInput: {
@@ -46,12 +48,12 @@ The library allows you to use [Stripe.js Checkout](https://stripe.com/payments/c
 
 1. Install package via npm or yarn:
 
-`npm install --save react-native-stripe-checkout` OR `yarn add react-native-stripe-checkout`
+`npm install --save react-native-stripe-checkout-webview` OR `yarn add react-native-stripe-checkout-webview`
 
 1. Import in your project
 
 ```javascript
-import StripeCheckout from 'react-native-stripe-checkout';
+import StripeCheckout from 'react-native-stripe-checkout-webview';
 ```
 
 ## Important Notes about URLs
