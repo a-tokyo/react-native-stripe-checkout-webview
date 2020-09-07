@@ -128,6 +128,8 @@ const StripeCheckoutWebView = (props: Props) => {
   /** Render the WebView holding the Stripe checkout flow */
   return (
     <WebView
+      /** pass baseUrl to avoid  `IntegrationError: Live Stripe.js integrations must use HTTPS.` error https://github.com/react-native-community/react-native-webview/issues/1317 */
+      baseUrl=""
       originWhitelist={['*']}
       {...webViewProps}
       source={{
