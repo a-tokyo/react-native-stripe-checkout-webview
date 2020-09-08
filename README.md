@@ -40,27 +40,24 @@ import StripeCheckout from 'react-native-stripe-checkout-webview';
 ```jsx
 import StripeCheckout from 'react-native-stripe-checkout-webview';
 
-const stripeCheckoutComponentProps: {
-  stripePublicKey: 'STRIPE_PUBLIC_KEY',
-  checkoutSessionInput: {
-    sessionId: CHECKOUT_SESSION_ID,
-  },
-  // Session succeeded
-  onSuccess: ({ checkoutSessionId }) => {
-    console.log(`Stripe checkout session succeeded. session id: ${checkoutSessionId}.`);
-  },
-  // Session cancelled
-  onCancel: () => {
-    console.log(`Stripe checkout session cancelled.`);
-  },
-};
+type Props = { STRIPE_PUBLIC_KEY: string, CHECKOUT_SESSION_ID: string };
 
-return (
+const MyStripeCheckout = ({ STRIPE_PUBLIC_KEY, CHECKOUT_SESSION_ID }: Props) => (
   <StripeCheckout
-    stripePublicKey={config.STRIPE_PUBLIC_KEY}
-    {...stripeCheckoutComponentProps}
+    stripePublicKey={STRIPE_PUBLIC_KEY}
+    checkoutSessionInput={{
+      sessionId: CHECKOUT_SESSION_ID,
+    }}
+    onSuccess={({ checkoutSessionId }) => {
+      console.log(`Stripe checkout session succeeded. session id: ${checkoutSessionId}.`);
+    }}
+    onCancel={() => {
+      console.log(`Stripe checkout session cancelled.`);
+    }}
   />
-)
+);
+
+export default MyStripeCheckout;
 ```
 
 
