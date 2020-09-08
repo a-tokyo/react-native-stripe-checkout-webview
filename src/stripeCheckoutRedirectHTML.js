@@ -33,7 +33,7 @@ const stripeCheckoutRedirectHTML = (
   const {
     htmlContentLoading = '<h1 id="sc-loading">Loading...</h1>',
     htmlContentError = '<div id="sc-error-message"></div>',
-  } = options;
+  } = options || {};
 
   /** Return html */
   return `

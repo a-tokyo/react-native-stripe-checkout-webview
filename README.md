@@ -8,7 +8,9 @@ React Native implementation for [Stripe.js Checkout](https://stripe.com/payments
 </a>
 <a href="https://twitter.com/intent/follow?screen_name=ahmad_tokyo"><img src="https://img.shields.io/twitter/follow/ahmad_tokyo.svg?label=Follow%20@ahmad_tokyo" alt="Follow @ahmad_tokyo"></img></a>
 
-![](https://i.imgur.com/auF95TW.png)
+<p align="center">
+  <img src="https://i.imgur.com/auF95TW.png" width="340px"></img>
+</p>
 
 ```jsx
 import StripeCheckout from 'react-native-stripe-checkout-webview';
