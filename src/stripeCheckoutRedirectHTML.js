@@ -45,12 +45,13 @@ const stripeCheckoutRedirectHTML = (
       <meta name="author" content="A-Tokyo">  
     </head>
     <body>
-      <!-- Load Stripe.js. -->
-      <script src="https://js.stripe.com/v3"></script>
       <!-- Display loading content -->
       ${htmlContentLoading || ''}
       <!-- Display error content -->
       ${htmlContentError || ''}
+      <!-- Exec JS without blocking dom -->      
+      <!-- Load Stripe.js -->
+      <script src="https://js.stripe.com/v3"></script>
       <!-- Stripe execution script -->
       <script>
         (function initStripeAndRedirectToCheckout () {
