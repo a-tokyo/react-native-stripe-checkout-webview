@@ -44,13 +44,13 @@ The library allows you to use [Stripe.js Checkout](https://stripe.com/payments/c
 
 ## Installation
 
-1. Ensure you've completed the setps in [prequisites.](#prequisites)
+- Ensure you've completed the setps in [prequisites.](#prequisites)
 
-1. Install package via npm or yarn:
+- Install package via npm or yarn:
 
 `npm install --save react-native-stripe-checkout-webview` OR `yarn add react-native-stripe-checkout-webview`
 
-1. Import in your project
+- Import in your project
 
 ```javascript
 import StripeCheckout from 'react-native-stripe-checkout-webview';

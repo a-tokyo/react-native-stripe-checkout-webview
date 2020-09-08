@@ -21,6 +21,7 @@
   },
   "keywords": [
     "react-native",
+    "react",
     "react-component",
     "ios",
     "android",
@@ -31,6 +32,8 @@
     "checkout",
     "stripe-checkout",
     "elements",
+    "react-native-expo",
+    "expo",
     "webview",
     "types",
     "flow",
