@@ -1,0 +1,33 @@
+{
+  "presets": [
+    "@babel/flow",
+    [
+      "@babel/env",
+      {
+        "targets": {
+          "node": "12.0"
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-transform-regenerator",
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-proposal-nullish-coalescing-operator",
+    "lodash",
+    "@babel/plugin-transform-react-jsx"
+  ],
+  "env": {
+    "production": {
+      "comments": false,
+      "compact": "auto",
+      "minified": true,
+      "ignore": [
+        "**/__tests__/",
+        "**/__mocks__/",
+        "**/*.test.js"
+      ]
+    }
+  }
+}
