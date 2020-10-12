@@ -20,7 +20,7 @@ const stripeCheckoutRedirectHTML = (
     htmlContentLoading?: string,
     /** The error is set on the element with id='sc-error-message' */
     htmlContentError?: string,
-  } = {},
+  },
 ): string => {
   if (!stripe_public_key) {
     throw new Error('Must provide Stripe public key.');

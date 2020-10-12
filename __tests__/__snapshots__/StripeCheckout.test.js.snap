@@ -1,0 +1,257 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StripeCheckout /> renders props correctly - extra props 1`] = `
+<WebView
+  baseUrl=""
+  cacheEnabled={true}
+  javaScriptEnabled={true}
+  onLoadEnd={[Function]}
+  onLoadStart={[Function]}
+  originWhitelist={
+    Array [
+      "*",
+    ]
+  }
+  source={
+    Object {
+      "html": "
+  <html>
+    <head>
+      <meta charset=\\"utf-8\\">
+      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      <title>Stripe Checkout</title>
+      <meta name=\\"author\\" content=\\"A-Tokyo\\">  
+    </head>
+    <body>
+      <!-- Display loading content -->
+      <h1 id=\\"sc-loading\\">Loading...</h1>
+      <!-- Display error content -->
+      <div id=\\"sc-error-message\\"></div>
+      <!-- Exec JS without blocking dom -->      
+      <!-- Load Stripe.js -->
+      <script src=\\"https://js.stripe.com/v3\\"></script>
+      <!-- Stripe execution script -->
+      <script>
+        (function initStripeAndRedirectToCheckout () {
+          const stripe = Stripe('sp_test_STRIPE_PUBLIC_KEY');
+          window.onload = () => {
+            // Redirect to Checkout
+            stripe.redirectToCheckout({\\"sessionId\\":\\"CHECKOUT_SESSION_ID\\"})
+              .then((result) => {
+                // Remove loading html
+                const loadingElement = document.getElementById('sc-loading');
+                if (loadingElement) {
+                  loadingElement.outerHTML = '';
+                }
+                // If redirectToCheckout fails due to a browser or network
+                // error, display the localized error message to your customer.
+                if (result.error) {
+                  const displayError = document.getElementById('sc-error-message');
+                  if (displayError) {
+                    displayError.textContent = result.error.message;
+                  }
+                }
+              });
+          };
+        })();
+      </script>
+    </body>
+  </html>
+  ",
+    }
+  }
+  useSharedProcessPool={true}
+/>
+`;
+
+exports[`<StripeCheckout /> renders props correctly - options 1`] = `
+<WebView
+  baseUrl=""
+  cacheEnabled={true}
+  javaScriptEnabled={true}
+  onLoadEnd={[Function]}
+  onLoadStart={[Function]}
+  originWhitelist={
+    Array [
+      "*",
+    ]
+  }
+  source={
+    Object {
+      "html": "
+  <html>
+    <head>
+      <meta charset=\\"utf-8\\">
+      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      <title>Stripe Checkout</title>
+      <meta name=\\"author\\" content=\\"A-Tokyo\\">  
+    </head>
+    <body>
+      <!-- Display loading content -->
+      <p>htmlContentLoading test</p>
+      <!-- Display error content -->
+      <p>htmlContentError test</p>
+      <!-- Exec JS without blocking dom -->      
+      <!-- Load Stripe.js -->
+      <script src=\\"https://js.stripe.com/v3\\"></script>
+      <!-- Stripe execution script -->
+      <script>
+        (function initStripeAndRedirectToCheckout () {
+          const stripe = Stripe('sp_test_STRIPE_PUBLIC_KEY');
+          window.onload = () => {
+            // Redirect to Checkout
+            stripe.redirectToCheckout({\\"sessionId\\":\\"CHECKOUT_SESSION_ID\\"})
+              .then((result) => {
+                // Remove loading html
+                const loadingElement = document.getElementById('sc-loading');
+                if (loadingElement) {
+                  loadingElement.outerHTML = '';
+                }
+                // If redirectToCheckout fails due to a browser or network
+                // error, display the localized error message to your customer.
+                if (result.error) {
+                  const displayError = document.getElementById('sc-error-message');
+                  if (displayError) {
+                    displayError.textContent = result.error.message;
+                  }
+                }
+              });
+          };
+        })();
+      </script>
+    </body>
+  </html>
+  ",
+    }
+  }
+  useSharedProcessPool={true}
+/>
+`;
+
+exports[`<StripeCheckout /> renders props correctly - webViewProps 1`] = `
+<WebView
+  baseUrl=""
+  cacheEnabled={true}
+  javaScriptEnabled={true}
+  onLoadEnd={[Function]}
+  onLoadStart={[Function]}
+  originWhitelist={
+    Array [
+      "https://stripe.com",
+    ]
+  }
+  source={
+    Object {
+      "html": "
+  <html>
+    <head>
+      <meta charset=\\"utf-8\\">
+      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      <title>Stripe Checkout</title>
+      <meta name=\\"author\\" content=\\"A-Tokyo\\">  
+    </head>
+    <body>
+      <!-- Display loading content -->
+      <h1 id=\\"sc-loading\\">Loading...</h1>
+      <!-- Display error content -->
+      <div id=\\"sc-error-message\\"></div>
+      <!-- Exec JS without blocking dom -->      
+      <!-- Load Stripe.js -->
+      <script src=\\"https://js.stripe.com/v3\\"></script>
+      <!-- Stripe execution script -->
+      <script>
+        (function initStripeAndRedirectToCheckout () {
+          const stripe = Stripe('sp_test_STRIPE_PUBLIC_KEY');
+          window.onload = () => {
+            // Redirect to Checkout
+            stripe.redirectToCheckout({\\"sessionId\\":\\"CHECKOUT_SESSION_ID\\"})
+              .then((result) => {
+                // Remove loading html
+                const loadingElement = document.getElementById('sc-loading');
+                if (loadingElement) {
+                  loadingElement.outerHTML = '';
+                }
+                // If redirectToCheckout fails due to a browser or network
+                // error, display the localized error message to your customer.
+                if (result.error) {
+                  const displayError = document.getElementById('sc-error-message');
+                  if (displayError) {
+                    displayError.textContent = result.error.message;
+                  }
+                }
+              });
+          };
+        })();
+      </script>
+    </body>
+  </html>
+  ",
+    }
+  }
+  useSharedProcessPool={true}
+/>
+`;
+
+exports[`<StripeCheckout /> renders props correctly 1`] = `
+<WebView
+  baseUrl=""
+  cacheEnabled={true}
+  javaScriptEnabled={true}
+  onLoadEnd={[Function]}
+  onLoadStart={[Function]}
+  originWhitelist={
+    Array [
+      "*",
+    ]
+  }
+  source={
+    Object {
+      "html": "
+  <html>
+    <head>
+      <meta charset=\\"utf-8\\">
+      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      <title>Stripe Checkout</title>
+      <meta name=\\"author\\" content=\\"A-Tokyo\\">  
+    </head>
+    <body>
+      <!-- Display loading content -->
+      <h1 id=\\"sc-loading\\">Loading...</h1>
+      <!-- Display error content -->
+      <div id=\\"sc-error-message\\"></div>
+      <!-- Exec JS without blocking dom -->      
+      <!-- Load Stripe.js -->
+      <script src=\\"https://js.stripe.com/v3\\"></script>
+      <!-- Stripe execution script -->
+      <script>
+        (function initStripeAndRedirectToCheckout () {
+          const stripe = Stripe('sp_test_STRIPE_PUBLIC_KEY');
+          window.onload = () => {
+            // Redirect to Checkout
+            stripe.redirectToCheckout({\\"sessionId\\":\\"CHECKOUT_SESSION_ID\\"})
+              .then((result) => {
+                // Remove loading html
+                const loadingElement = document.getElementById('sc-loading');
+                if (loadingElement) {
+                  loadingElement.outerHTML = '';
+                }
+                // If redirectToCheckout fails due to a browser or network
+                // error, display the localized error message to your customer.
+                if (result.error) {
+                  const displayError = document.getElementById('sc-error-message');
+                  if (displayError) {
+                    displayError.textContent = result.error.message;
+                  }
+                }
+              });
+          };
+        })();
+      </script>
+    </body>
+  </html>
+  ",
+    }
+  }
+  useSharedProcessPool={true}
+/>
+`;

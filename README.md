@@ -5,6 +5,9 @@ React Native implementation for [Stripe.js Checkout](https://stripe.com/payments
   <img src="https://img.shields.io/npm/v/react-native-stripe-checkout-webview.svg"></img>
   <img src="https://img.shields.io/npm/dt/react-native-stripe-checkout-webview.svg"></img>
 </a>
+<a href="https://codecov.io/gh/A-Tokyo/react-native-stripe-checkout-webview">
+  <img src="https://codecov.io/gh/A-Tokyo/react-native-stripe-checkout-webview/branch/main/graph/badge.svg" />
+</a>
 <a href="https://twitter.com/intent/follow?screen_name=ahmad_tokyo"><img src="https://img.shields.io/twitter/follow/ahmad_tokyo.svg?label=Follow%20@ahmad_tokyo" alt="Follow @ahmad_tokyo"></img></a>
 
 
