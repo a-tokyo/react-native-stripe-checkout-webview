@@ -89,10 +89,11 @@ export default MyStripeCheckout;
 ## Contributing
 Pull requests are highly appreciated! For major changes, please open an issue first to discuss what you would like to change.
 
+### Related Projects
+- Stripe's identity verification for react native: [react-native-stripe-identity](https://github.com/A-Tokyo/react-native-stripe-identity)
 
 ### Roadmap
 - Add eslint
 - Config prettier
 - Add typescript
-- Add jest unit + snapshot tests
 
