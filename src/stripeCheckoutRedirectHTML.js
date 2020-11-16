@@ -57,9 +57,11 @@ const stripeCheckoutRedirectHTML = (
         (function initStripeAndRedirectToCheckout () {
           const stripe = Stripe('${stripe_public_key}');
           window.onload = () => {
+            console.log('RNSC: window loaded');
             // Redirect to Checkout
             stripe.redirectToCheckout(${JSON.stringify(input)})
-              .then((result) => {
+            .then((result) => {
+                console.log('RNSC: window loaded', result);
                 // Remove loading html
                 const loadingElement = document.getElementById('sc-loading');
                 if (loadingElement) {
@@ -73,6 +75,8 @@ const stripeCheckoutRedirectHTML = (
                     displayError.textContent = result.error.message;
                   }
                 }
+              }).catch((err) => {
+                console.error('RNSC: err', err);
               });
           };
         })();

@@ -35,9 +35,11 @@ exports[`<StripeCheckout /> renders props correctly - extra props 1`] = `
         (function initStripeAndRedirectToCheckout () {
           const stripe = Stripe('sp_test_STRIPE_PUBLIC_KEY');
           window.onload = () => {
+            console.log('RNSC: window loaded');
             // Redirect to Checkout
             stripe.redirectToCheckout({\\"sessionId\\":\\"CHECKOUT_SESSION_ID\\"})
-              .then((result) => {
+            .then((result) => {
+                console.log('RNSC: window loaded', result);
                 // Remove loading html
                 const loadingElement = document.getElementById('sc-loading');
                 if (loadingElement) {
@@ -51,6 +53,8 @@ exports[`<StripeCheckout /> renders props correctly - extra props 1`] = `
                     displayError.textContent = result.error.message;
                   }
                 }
+              }).catch((err) => {
+                console.error('RNSC: err', err);
               });
           };
         })();
@@ -99,9 +103,11 @@ exports[`<StripeCheckout /> renders props correctly - options 1`] = `
         (function initStripeAndRedirectToCheckout () {
           const stripe = Stripe('sp_test_STRIPE_PUBLIC_KEY');
           window.onload = () => {
+            console.log('RNSC: window loaded');
             // Redirect to Checkout
             stripe.redirectToCheckout({\\"sessionId\\":\\"CHECKOUT_SESSION_ID\\"})
-              .then((result) => {
+            .then((result) => {
+                console.log('RNSC: window loaded', result);
                 // Remove loading html
                 const loadingElement = document.getElementById('sc-loading');
                 if (loadingElement) {
@@ -115,6 +121,8 @@ exports[`<StripeCheckout /> renders props correctly - options 1`] = `
                     displayError.textContent = result.error.message;
                   }
                 }
+              }).catch((err) => {
+                console.error('RNSC: err', err);
               });
           };
         })();
@@ -142,6 +150,7 @@ exports[`<StripeCheckout /> renders props correctly - webViewProps 1`] = `
   }
   source={
     Object {
+      "baseUrl": "https://github.com/a-tokyo",
       "html": "
   <html>
     <head>
@@ -163,9 +172,11 @@ exports[`<StripeCheckout /> renders props correctly - webViewProps 1`] = `
         (function initStripeAndRedirectToCheckout () {
           const stripe = Stripe('sp_test_STRIPE_PUBLIC_KEY');
           window.onload = () => {
+            console.log('RNSC: window loaded');
             // Redirect to Checkout
             stripe.redirectToCheckout({\\"sessionId\\":\\"CHECKOUT_SESSION_ID\\"})
-              .then((result) => {
+            .then((result) => {
+                console.log('RNSC: window loaded', result);
                 // Remove loading html
                 const loadingElement = document.getElementById('sc-loading');
                 if (loadingElement) {
@@ -179,6 +190,8 @@ exports[`<StripeCheckout /> renders props correctly - webViewProps 1`] = `
                     displayError.textContent = result.error.message;
                   }
                 }
+              }).catch((err) => {
+                console.error('RNSC: err', err);
               });
           };
         })();
@@ -227,9 +240,11 @@ exports[`<StripeCheckout /> renders props correctly 1`] = `
         (function initStripeAndRedirectToCheckout () {
           const stripe = Stripe('sp_test_STRIPE_PUBLIC_KEY');
           window.onload = () => {
+            console.log('RNSC: window loaded');
             // Redirect to Checkout
             stripe.redirectToCheckout({\\"sessionId\\":\\"CHECKOUT_SESSION_ID\\"})
-              .then((result) => {
+            .then((result) => {
+                console.log('RNSC: window loaded', result);
                 // Remove loading html
                 const loadingElement = document.getElementById('sc-loading');
                 if (loadingElement) {
@@ -243,6 +258,8 @@ exports[`<StripeCheckout /> renders props correctly 1`] = `
                     displayError.textContent = result.error.message;
                   }
                 }
+              }).catch((err) => {
+                console.error('RNSC: err', err);
               });
           };
         })();

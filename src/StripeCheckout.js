@@ -138,6 +138,7 @@ const StripeCheckoutWebView = (props: Props) => {
           checkoutSessionInput,
           options,
         ),
+        ...webViewProps?.source,
       }}
       onLoadStart={_onLoadStart}
       onLoadEnd={_onLoadEnd}

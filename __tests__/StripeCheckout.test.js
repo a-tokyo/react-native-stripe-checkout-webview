@@ -33,6 +33,9 @@ describe('<StripeCheckout />', () => {
       render({
         webViewProps: {
           originWhitelist: ['https://stripe.com'],
+          source: {
+            baseUrl: 'https://github.com/a-tokyo'
+          },
         },
       }),
     );
