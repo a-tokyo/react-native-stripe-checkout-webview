@@ -138,6 +138,8 @@ const StripeCheckoutWebView = (props: Props) => {
           checkoutSessionInput,
           options,
         ),
+        // Ensure an https baseUrl is used to avoid infinite loading on production due to https://github.com/A-Tokyo/react-native-stripe-checkout-webview/issues/10
+        baseUrl: 'https://stripe.com',
         ...webViewProps?.source,
       }}
       onLoadStart={_onLoadStart}

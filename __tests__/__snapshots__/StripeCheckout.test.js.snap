@@ -14,6 +14,7 @@ exports[`<StripeCheckout /> renders props correctly - extra props 1`] = `
   }
   source={
     Object {
+      "baseUrl": "https://stripe.com",
       "html": "
   <html>
     <head>
@@ -82,6 +83,7 @@ exports[`<StripeCheckout /> renders props correctly - options 1`] = `
   }
   source={
     Object {
+      "baseUrl": "https://stripe.com",
       "html": "
   <html>
     <head>
@@ -219,6 +221,7 @@ exports[`<StripeCheckout /> renders props correctly 1`] = `
   }
   source={
     Object {
+      "baseUrl": "https://stripe.com",
       "html": "
   <html>
     <head>
