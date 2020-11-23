@@ -4,7 +4,7 @@
  * Generates HTML content that redirects to a Stripe checkout session
  */
 const stripeCheckoutRedirectHTML = (
-  stripe_public_key: string,
+  stripePublicKey: string,
   input:
     | {
         sessionId: string,
@@ -13,7 +13,7 @@ const stripeCheckoutRedirectHTML = (
         clientReferenceId: string,
         successUrl: string,
         cancelUrl: string,
-        items?: Array<{ plan: string, quantity: string }>,
+        items?: Array<{plan: string, quantity: string}>,
       },
   options?: {
     /** The loading item is set on the element with id='sc-loading' */
@@ -24,7 +24,7 @@ const stripeCheckoutRedirectHTML = (
     htmlContentHead?: string,
   },
 ): string => {
-  if (!stripe_public_key) {
+  if (!stripePublicKey) {
     throw new Error('Must provide Stripe public key.');
   }
   if (!input) {
@@ -59,7 +59,7 @@ const stripeCheckoutRedirectHTML = (
       <!-- Stripe execution script -->
       <script>
         (function initStripeAndRedirectToCheckout () {
-          const stripe = Stripe('${stripe_public_key}');
+          const stripe = Stripe('${stripePublicKey}');
           window.onload = () => {
             console.log('RNSC: window loaded');
             // Redirect to Checkout

@@ -8,10 +8,7 @@
     "url": "https://github.com/A-Tokyo"
   },
   "main": "src/index.js",
-  "files": [
-    "src/",
-    "lib/"
-  ],
+  "files": ["src/", "lib/"],
   "repository": {
     "type": "git",
     "url": "https://github.com/a-tokyo/react-native-stripe-checkout-webview.git"
@@ -20,7 +17,9 @@
     "build": "rm -rf lib && yarn build:flow && yarn build:js",
     "build:js": "babel src --out-dir lib -s --ignore *.test.js,**/*.test.js",
     "build:flow": "flow-copy-source -v -i '*.test.js' -i '**/*.test.js' src lib",
-    "test": "yarn build && yarn jest --coverage"
+    "test": "yarn build && yarn jest --coverage",
+    "lint": "eslint -c .eslintrc.json --ext .js ./src",
+    "lint-fix": "eslint -c .eslintrc.json --ext .js ./src --fix"
   },
   "keywords": [
     "react-native",
@@ -65,15 +64,29 @@
     "@testing-library/react": "^11.0.4",
     "@testing-library/react-hooks": "^3.4.2",
     "@testing-library/user-event": "^12.1.7",
+    "babel-eslint": "^10.1.0",
     "babel-jest": "^26.5.2",
     "babel-plugin-lodash": "^3.3.4",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
     "enzyme-to-json": "^3.6.1",
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "flow-copy-source": "^2.0.9",
     "is-html": "^2.0.0",
     "jest": "^26.5.3",
     "jest-enzyme": "^7.1.2",
+    "prettier": "^2.2.0",
+    "regenerator-runtime": "^0.13.7"
+  },
+  "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-native": "^0.63.3",

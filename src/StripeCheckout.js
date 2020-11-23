@@ -1,7 +1,7 @@
 /* @flow */
-import React, { useState } from 'react';
-import { Text } from 'react-native';
-import { WebView } from 'react-native-webview';
+import React, {useState} from 'react';
+import {Text} from 'react-native';
+import {WebView} from 'react-native-webview';
 
 import stripeCheckoutRedirectHTML from './stripeCheckoutRedirectHTML';
 
@@ -17,12 +17,12 @@ type Props = {
         clientReferenceId: string,
         successUrl: string,
         cancelUrl: string,
-        items?: Array<{ plan: string, quantity: string }>,
+        items?: Array<{plan: string, quantity: string}>,
       },
   /** Called when the Stripe checkout session completes with status 'success' */
-  onSuccess: ({ [key: string]: any, checkoutSessionId?: string }) => any,
+  onSuccess: ({[key: string]: any, checkoutSessionId?: string}) => any,
   /** Called when the Stripe checkout session completes with status 'cancel' */
-  onCancel: ({ [key: string]: any }) => any,
+  onCancel: ({[key: string]: any}) => any,
   /** Called when the Stripe checkout session webpage loads successfully */
   onLoadingComplete?: (syntheticEvent: SyntheticEvent) => any,
   /** Extra options */
@@ -69,9 +69,9 @@ const StripeCheckoutWebView = (props: Props) => {
    *
    * handles completing the checkout session
    */
-  const _onLoadStart = (syntheticEvent: SyntheticEvent) => {
-    const { nativeEvent } = syntheticEvent;
-    const { url: currentUrl } = nativeEvent;
+  const onLoadStart = (syntheticEvent: SyntheticEvent) => {
+    const {nativeEvent} = syntheticEvent;
+    const {url: currentUrl} = nativeEvent;
     /** Check and handle checkout state: success */
     if (currentUrl.includes('sc_checkout=success')) {
       const checkoutSessionIdKey = 'sc_sid=';
@@ -83,7 +83,7 @@ const StripeCheckoutWebView = (props: Props) => {
         .replace('/', '');
       setCompleted(true);
       if (onSuccess) {
-        onSuccess({ ...props, checkoutSessionId });
+        onSuccess({...props, checkoutSessionId});
       }
       return;
     }
@@ -103,10 +103,14 @@ const StripeCheckoutWebView = (props: Props) => {
   /**
    * Called upon URL load complete
    */
-  const _onLoadEnd = (syntheticEvent: SyntheticEvent) => {
-    const { nativeEvent } = syntheticEvent;
+  const onLoadEnd = (syntheticEvent: SyntheticEvent) => {
+    const {nativeEvent} = syntheticEvent;
     /** set isLoading to false once the stripe checkout page loads */
-    if (!hasLoaded && nativeEvent.url.startsWith('https://checkout.stripe.com') && onLoadingComplete) {
+    if (
+      !hasLoaded &&
+      nativeEvent.url.startsWith('https://checkout.stripe.com') &&
+      onLoadingComplete
+    ) {
       setHasLoaded(true);
       onLoadingComplete(syntheticEvent);
     }
@@ -119,7 +123,7 @@ const StripeCheckoutWebView = (props: Props) => {
   /** If the checkout session is complete -- render the complete content */
   if (completed) {
     return renderOnComplete ? (
-      renderOnComplete({ url: completed, ...props })
+      renderOnComplete({url: completed, ...props})
     ) : (
       <Text>Stripe Checkout session complete.</Text>
     );
@@ -133,15 +137,11 @@ const StripeCheckoutWebView = (props: Props) => {
       originWhitelist={['*']}
       {...webViewProps}
       source={{
-        html: stripeCheckoutRedirectHTML(
-          stripePublicKey,
-          checkoutSessionInput,
-          options,
-        ),
+        html: stripeCheckoutRedirectHTML(stripePublicKey, checkoutSessionInput, options),
         ...webViewProps?.source,
       }}
-      onLoadStart={_onLoadStart}
-      onLoadEnd={_onLoadEnd}
+      onLoadStart={onLoadStart}
+      onLoadEnd={onLoadEnd}
     />
   );
 };
