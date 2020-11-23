@@ -24,6 +24,7 @@ describe('stripeCheckoutRedirectHTML', () => {
           {
             htmlContentLoading: '<p>htmlContentLoading test</p>',
             htmlContentError: '<p>htmlContentError test</p>',
+            htmlContentHead: '<style>.test{}</style>',
           },
         ),
       ),
@@ -41,6 +42,7 @@ describe('stripeCheckoutRedirectHTML', () => {
           {
             htmlContentLoading: null,
             htmlContentError: null,
+            htmlContentHead: null,
           },
         ),
       ),

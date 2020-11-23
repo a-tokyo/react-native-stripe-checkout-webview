@@ -19,12 +19,14 @@ describe('<StripeCheckout />', () => {
   });
 
   it('renders props correctly - extra props', () => {
-    const wrapper = shallow(render({
-      onSuccess: jest.fn(),
-      onCancel: jest.fn(),
-      onLoadingComplete: jest.fn(),
-      renderOnComplete: jest.fn(),
-    }));
+    const wrapper = shallow(
+      render({
+        onSuccess: jest.fn(),
+        onCancel: jest.fn(),
+        onLoadingComplete: jest.fn(),
+        renderOnComplete: jest.fn(),
+      }),
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -34,7 +36,7 @@ describe('<StripeCheckout />', () => {
         webViewProps: {
           originWhitelist: ['https://stripe.com'],
           source: {
-            baseUrl: 'https://github.com/a-tokyo'
+            baseUrl: 'https://github.com/a-tokyo',
           },
         },
       }),
@@ -48,6 +50,7 @@ describe('<StripeCheckout />', () => {
         options: {
           htmlContentLoading: '<p>htmlContentLoading test</p>',
           htmlContentError: '<p>htmlContentError test</p>',
+          htmlContentHead: '<style>.test{}</style>',
         },
       }),
     );

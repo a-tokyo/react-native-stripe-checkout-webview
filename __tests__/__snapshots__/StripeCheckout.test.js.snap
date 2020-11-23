@@ -20,7 +20,8 @@ exports[`<StripeCheckout /> renders props correctly - extra props 1`] = `
       <meta charset=\\"utf-8\\">
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
       <title>Stripe Checkout</title>
-      <meta name=\\"author\\" content=\\"A-Tokyo\\">  
+      <meta name=\\"author\\" content=\\"A-Tokyo\\">
+      
     </head>
     <body>
       <!-- Display loading content -->
@@ -88,7 +89,8 @@ exports[`<StripeCheckout /> renders props correctly - options 1`] = `
       <meta charset=\\"utf-8\\">
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
       <title>Stripe Checkout</title>
-      <meta name=\\"author\\" content=\\"A-Tokyo\\">  
+      <meta name=\\"author\\" content=\\"A-Tokyo\\">
+      <style>.test{}</style>
     </head>
     <body>
       <!-- Display loading content -->
@@ -157,7 +159,8 @@ exports[`<StripeCheckout /> renders props correctly - webViewProps 1`] = `
       <meta charset=\\"utf-8\\">
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
       <title>Stripe Checkout</title>
-      <meta name=\\"author\\" content=\\"A-Tokyo\\">  
+      <meta name=\\"author\\" content=\\"A-Tokyo\\">
+      
     </head>
     <body>
       <!-- Display loading content -->
@@ -225,7 +228,8 @@ exports[`<StripeCheckout /> renders props correctly 1`] = `
       <meta charset=\\"utf-8\\">
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
       <title>Stripe Checkout</title>
-      <meta name=\\"author\\" content=\\"A-Tokyo\\">  
+      <meta name=\\"author\\" content=\\"A-Tokyo\\">
+      
     </head>
     <body>
       <!-- Display loading content -->

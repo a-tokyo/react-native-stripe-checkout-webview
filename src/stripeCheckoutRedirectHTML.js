@@ -20,6 +20,8 @@ const stripeCheckoutRedirectHTML = (
     htmlContentLoading?: string,
     /** The error is set on the element with id='sc-error-message' */
     htmlContentError?: string,
+    /** The extra HTML content to be placed in the HEAD */
+    htmlContentHead?: string,
   },
 ): string => {
   if (!stripe_public_key) {
@@ -33,6 +35,7 @@ const stripeCheckoutRedirectHTML = (
   const {
     htmlContentLoading = '<h1 id="sc-loading">Loading...</h1>',
     htmlContentError = '<div id="sc-error-message"></div>',
+    htmlContentHead = '',
   } = options || {};
 
   /** Return html */
@@ -42,7 +45,8 @@ const stripeCheckoutRedirectHTML = (
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Stripe Checkout</title>
-      <meta name="author" content="A-Tokyo">  
+      <meta name="author" content="A-Tokyo">
+      ${htmlContentHead || ''}
     </head>
     <body>
       <!-- Display loading content -->
