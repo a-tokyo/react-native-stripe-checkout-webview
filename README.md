@@ -82,6 +82,7 @@ export default MyStripeCheckout;
 - `options` (?Object) - custom options to display content in the webview
   - `htmlContentLoading` (String) - Html string to display a loading indication. - default: `<h1 id="sc-loading">Loading...</h1>` - note: The loading item is set on the element with id='sc-loading'
   - `htmlContentError` (String) - Html string to display stripe errors. - default: `<div id="sc-error-message"></div>` - note: The error is set on the element with id='sc-error-message'
+  - `htmlContentHead` (String) - Html string to inject in head. - default: ''
 - `webViewProps` (?Object) - WebView Component props, spread on the WebView Component.
 - `renderOnComplete` (?(props) => React$Node) - Optional rendering function returning a component to display upon checkout completion. note: You don't need this if your onSuccess and onCancel functions navigate away from the component.
 
