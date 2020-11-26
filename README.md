@@ -87,6 +87,16 @@ export default MyStripeCheckout;
 - `renderOnComplete` (?(props) => React$Node) - Optional rendering function returning a component to display upon checkout completion. note: You don't need this if your onSuccess and onCancel functions navigate away from the component.
 
 
+## Apple Pay and Google Pay
+- This library uses [react-native-webview](https://github.com/react-native-webview) under the hood to render the Stripe Checkout webpage. To get Apple Pay and Google Pay to work we need to pass the context to the browser, [here's how to get it working](https://github.com/react-native-webview/react-native-webview/issues/920#issuecomment-720305564):
+  - What causes the issue is an injected script by default on webview start named html5HistoryAPIShimSource
+How to fix (Note that the fix doesn't fully work on expo, but workarounds can be found in the issue thread):
+    - Comment this line in /node_modules/react-native-webview/apple/RNCWebView.m like shown below (in v10.9.2 line number is 1270.)
+    ```
+    WKUserScript *script = [[WKUserScript alloc] initWithSource:html5HistoryAPIShimSource injectionTime:WKUserScriptInjectionTimeAtDocumentStart
+    forMainFrameOnly:YES];
+    // [wkWebViewConfig.userContentController addUserScript:script]; // this line that inject "html5HistoryAPIShimSource" on start
+    ```
 ## Contributing
 Pull requests are highly appreciated! For major changes, please open an issue first to discuss what you would like to change.
 
