@@ -87,10 +87,10 @@ export default MyStripeCheckout;
 
 
 ## Apple Pay and Google Pay
-- This library uses [react-native-webview](https://github.com/react-native-webview) under the hood to render the Stripe Checkout webpage. To get Apple pay and Google pay to work we need to pass the context to the browser, [here's how to get it working](https://github.com/react-native-webview/react-native-webview/issues/920#issuecomment-720305564):
-  - What causes issue - script that "injected" by default on webview start - html5HistoryAPIShimSource
-How to fix:
-    - just comment line in /node_modules/react-native-webview/apple/RNCWebView.m like shown below
+- This library uses [react-native-webview](https://github.com/react-native-webview) under the hood to render the Stripe Checkout webpage. To get Apple Pay and Google Pay to work we need to pass the context to the browser, [here's how to get it working](https://github.com/react-native-webview/react-native-webview/issues/920#issuecomment-720305564):
+  - What causes the issue is an injected script by default on webview start named html5HistoryAPIShimSource
+How to fix (Note that the fix doesn't fully work on expo, but workarounds can be found in the issue thread):
+    - Comment this line in /node_modules/react-native-webview/apple/RNCWebView.m like shown below (in v10.9.2 line number is 1270.)
     ```
     WKUserScript *script = [[WKUserScript alloc] initWithSource:html5HistoryAPIShimSource injectionTime:WKUserScriptInjectionTimeAtDocumentStart
     forMainFrameOnly:YES];
