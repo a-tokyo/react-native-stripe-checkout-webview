@@ -1,6 +1,6 @@
 {
   "name": "react-native-stripe-checkout-webview",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "💰 React Native implementation for Stripe.js Checkout",
   "author": {
     "name": "Ahmed Tarek",
