@@ -97,6 +97,8 @@ How to fix (Note that the fix doesn't fully work on expo, but workarounds can be
     forMainFrameOnly:YES];
     // [wkWebViewConfig.userContentController addUserScript:script]; // this line that inject "html5HistoryAPIShimSource" on start
     ```
+    - You can use [patch-package](https://www.npmjs.com/package/patch-package) to easily persist this change
+
 ## Contributing
 Pull requests are highly appreciated! For major changes, please open an issue first to discuss what you would like to change.
 
