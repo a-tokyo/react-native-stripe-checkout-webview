@@ -76,6 +76,36 @@ export default MyStripeCheckout;
 
 - `stripePublicKey` (String) - Stripe public key of your project.
 - `checkoutSessionInput` (Object) - Object to be passed to Stripe's `redirectToCheckout` function. [Docs](https://stripe.com/docs/js/checkout/redirect_to_checkout).
+  - ```js
+    {
+      sessionId: string,
+      successUrl: string,
+      cancelUrl: string,
+      // common
+      customerEmail?: string,
+      billingAddressCollection?: 'required' | 'auto',
+      shippingAddressCollection?: {
+        allowedCountries: Array<string>,
+      },
+      locale?: string,
+    }
+    | {
+        clientReferenceId: string,
+        successUrl: string,
+        cancelUrl: string,
+        items?: Array<{ plan: string, quantity: string }>,
+        lineItems?: Array<{ price: number, quantity: number }>,
+        mode?: 'payment' | 'subscription',
+        submitType?: string,
+        // common
+        customerEmail?: string,
+        billingAddressCollection?: 'required' | 'auto',
+        shippingAddressCollection?: {
+          allowedCountries: Array<string>,
+        },
+        locale?: string,
+      }
+    ```
 - `onSuccess` (?Function) - Called upon success of the checkout session with `{ ...props, checkoutSessionId: 'CHECKOUT_SESSION_ID' }`
 - `onCancel` (?Function) - Called upon success of the checkout session with `{ ...props }`
 - `onLoadingComplete` (?Function) - Called when the Stripe checkout session webpage loads successfully.

@@ -8,12 +8,31 @@ const stripeCheckoutRedirectHTML = (
   input:
     | {
         sessionId: string,
+        successUrl: string,
+        cancelUrl: string,
+        // common
+        customerEmail?: string,
+        billingAddressCollection?: 'required' | 'auto',
+        shippingAddressCollection?: {
+          allowedCountries: Array<string>,
+        },
+        locale?: string,
       }
     | {
         clientReferenceId: string,
         successUrl: string,
         cancelUrl: string,
         items?: Array<{ plan: string, quantity: string }>,
+        lineItems?: Array<{ price: number, quantity: number }>,
+        mode?: 'payment' | 'subscription',
+        submitType?: string,
+        // common
+        customerEmail?: string,
+        billingAddressCollection?: 'required' | 'auto',
+        shippingAddressCollection?: {
+          allowedCountries: Array<string>,
+        },
+        locale?: string,
       },
   options?: {
     /** The loading item is set on the element with id='sc-loading' */

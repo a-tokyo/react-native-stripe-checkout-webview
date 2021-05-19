@@ -9,16 +9,34 @@ type Props = {
   /** Stripe public key */
   stripePublicKey: string,
   /** Stripe Checkout Session input */
-  checkoutSessionInput:
-    | {
-        sessionId: string,
-      }
-    | {
-        clientReferenceId: string,
-        successUrl: string,
-        cancelUrl: string,
-        items?: Array<{ plan: string, quantity: string }>,
-      },
+  checkoutSessionInput: {
+    sessionId: string,
+    successUrl: string,
+    cancelUrl: string,
+    // common
+    customerEmail?: string,
+    billingAddressCollection?: 'required' | 'auto',
+    shippingAddressCollection?: {
+      allowedCountries: Array<string>,
+    },
+    locale?: string,
+  }
+| {
+    clientReferenceId: string,
+    successUrl: string,
+    cancelUrl: string,
+    items?: Array<{ plan: string, quantity: string }>,
+    lineItems?: Array<{ price: number, quantity: number }>,
+    mode?: 'payment' | 'subscription',
+    submitType?: string,
+    // common
+    customerEmail?: string,
+    billingAddressCollection?: 'required' | 'auto',
+    shippingAddressCollection?: {
+      allowedCountries: Array<string>,
+    },
+    locale?: string,
+  },
   /** Called when the Stripe checkout session completes with status 'success' */
   onSuccess: ({ [key: string]: any, checkoutSessionId?: string }) => any,
   /** Called when the Stripe checkout session completes with status 'cancel' */
