@@ -1,6 +1,7 @@
 /* @flow */
+import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 import stripeCheckoutRedirectHTML from './stripeCheckoutRedirectHTML';
@@ -145,6 +146,8 @@ const StripeCheckoutWebView = (props: Props) => {
 
   /** Render the WebView holding the Stripe checkout flow */
   return (
+    <>
+    <StatusBar style="dark"/>
     <WebView
       /** pass baseUrl to avoid  `IntegrationError: Live Stripe.js integrations must use HTTPS.` error https://github.com/react-native-community/react-native-webview/issues/1317 */
       baseUrl=""
@@ -162,7 +165,9 @@ const StripeCheckoutWebView = (props: Props) => {
       }}
       onLoadStart={_onLoadStart}
       onLoadEnd={_onLoadEnd}
+      style={{marginTop: 40}}
     />
+    </>
   );
 };
 
