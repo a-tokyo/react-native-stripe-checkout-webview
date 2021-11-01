@@ -6947,9 +6947,9 @@ react-native-codegen@^0.0.6:
     nullthrows "^1.1.1"
 
 react-native-webview@^11.3.2:
-  version "11.3.2"
-  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.3.2.tgz#17155a69caf1910233ae3d606dce6caf57b0169c"
-  integrity sha512-j+0eUKYY3MCO7DRhZaIPY6+0q+Yo1Iyhz5f7cde+i5vR71CcJ/60DhZPw5SSqXZnZiVX0Myz1D46u8dtfRmQFg==
+  version "11.14.2"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.14.2.tgz#31e62864b28f950fd887bf20469fe8cd71101d29"
+  integrity sha512-4pRLskbu98xmC8q+YY9cfshSxhywVran+tQ0ou7V6Js0ye2Zb33dDpe6d7QUWD39w5LbYSI3knpxLLVDAVm0hA==
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
