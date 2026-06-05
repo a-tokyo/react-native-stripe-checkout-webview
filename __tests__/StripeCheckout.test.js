@@ -129,6 +129,21 @@ describe('<StripeCheckout /> redirect handling', () => {
     );
   });
 
+  it('passes the actual completion url to renderOnComplete', () => {
+    const renderOnComplete = jest.fn(() => null);
+    const wrapper = shallow(render({ renderOnComplete }));
+    const onShouldStartLoadWithRequest = wrapper
+      .find('WebView')
+      .prop('onShouldStartLoadWithRequest');
+
+    onShouldStartLoadWithRequest({ url: SUCCESS_URL });
+    wrapper.update();
+
+    expect(renderOnComplete).toHaveBeenCalledWith(
+      expect.objectContaining({ url: SUCCESS_URL }),
+    );
+  });
+
   it('excludes a url fragment from the parsed checkout session id', () => {
     const onSuccess = jest.fn();
     const wrapper = shallow(render({ onSuccess }));

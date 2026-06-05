@@ -109,7 +109,7 @@ const StripeCheckoutWebView = (props: Props) => {
          * Stop at a query separator (`&`), path separator (`/`) or fragment (`#`). */
         const sessionIdMatch = currentUrl.match(/sc_sid=([^&/#]+)/);
         const checkoutSessionId = sessionIdMatch ? sessionIdMatch[1] : undefined;
-        setCompleted(true);
+        setCompleted(currentUrl);
         if (onSuccess) {
           onSuccess({ ...props, checkoutSessionId });
         }
@@ -120,7 +120,7 @@ const StripeCheckoutWebView = (props: Props) => {
     if (currentUrl.includes('sc_checkout=cancel')) {
       if (!hasCompletedRef.current) {
         hasCompletedRef.current = true;
-        setCompleted(true);
+        setCompleted(currentUrl);
         if (onCancel) {
           onCancel(props);
         }
