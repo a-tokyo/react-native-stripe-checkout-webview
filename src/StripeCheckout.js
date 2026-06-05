@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Text } from 'react-native';
 import { WebView } from 'react-native-webview';
 
@@ -10,15 +10,15 @@ type Props = {
   stripePublicKey: string,
   /** Stripe Checkout Session input */
   checkoutSessionInput: {
+    /**
+     * Server-side Checkout Session flow.
+     * Only `sessionId` is forwarded to `stripe.redirectToCheckout`.
+     * Everything else (`successUrl`, `cancelUrl`, `locale`, ...) must be
+     * configured when creating the Checkout Session server-side.
+     * `locale`, if provided, is additionally used as a client-side hint via
+     * the Stripe.js constructor.
+     */
     sessionId: string,
-    successUrl: string,
-    cancelUrl: string,
-    // common
-    customerEmail?: string,
-    billingAddressCollection?: 'required' | 'auto',
-    shippingAddressCollection?: {
-      allowedCountries: Array<string>,
-    },
     locale?: string,
   }
 | {
@@ -79,39 +79,85 @@ const StripeCheckoutWebView = (props: Props) => {
   } = props;
   /** Holds the complete URL if exists */
   const [completed, setCompleted] = useState(null);
-  /** Holds wether Stripe Checkout has loaded yet */
+  /** Holds whether Stripe Checkout has loaded yet */
   const [hasLoaded, setHasLoaded] = useState(false);
+  /**
+   * Tracks whether the checkout completion has already been handled so that
+   * `onSuccess`/`onCancel` fire exactly once even though completion can be
+   * detected from both `onShouldStartLoadWithRequest` and `onLoadStart`.
+   */
+  const hasCompletedRef = useRef(false);
 
   /**
-   * Called everytime the URL stats to load in the webview
+   * Inspects a URL the WebView is about to load and, if it is the Stripe
+   * success/cancel redirect, completes the checkout session.
    *
-   * handles completing the checkout session
+   * @returns {boolean} `true` if the URL was a completion URL (and was handled),
+   *   in which case the caller should prevent the WebView from navigating to it
+   *   - this avoids landing on a 404 when the success/cancel URL is a placeholder
+   *   (see https://github.com/a-tokyo/react-native-stripe-checkout-webview/issues/138).
+   */
+  const _handleCompletionUrl = (currentUrl: string): boolean => {
+    if (!currentUrl) {
+      return false;
+    }
+    /** Check and handle checkout state: success */
+    if (currentUrl.includes('sc_checkout=success')) {
+      if (!hasCompletedRef.current) {
+        hasCompletedRef.current = true;
+        /** Extract the optional `sc_sid` checkout session id - undefined if absent.
+         * Stop at a query separator (`&`), path separator (`/`) or fragment (`#`). */
+        const sessionIdMatch = currentUrl.match(/sc_sid=([^&/#]+)/);
+        const checkoutSessionId = sessionIdMatch ? sessionIdMatch[1] : undefined;
+        setCompleted(currentUrl);
+        if (onSuccess) {
+          onSuccess({ ...props, checkoutSessionId });
+        }
+      }
+      return true;
+    }
+    /** Check and handle checkout state: cancel */
+    if (currentUrl.includes('sc_checkout=cancel')) {
+      if (!hasCompletedRef.current) {
+        hasCompletedRef.current = true;
+        setCompleted(currentUrl);
+        if (onCancel) {
+          onCancel(props);
+        }
+      }
+      return true;
+    }
+    return false;
+  };
+
+  /**
+   * Called before the WebView loads a URL.
+   *
+   * Returning `false` prevents the WebView from navigating to the success/cancel
+   * URL, so a placeholder/non-existent redirect URL never renders a 404 page.
+   */
+  const _onShouldStartLoadWithRequest = (request: { url: string }): boolean => {
+    if (_handleCompletionUrl(request && request.url)) {
+      /** block navigation to the success/cancel URL */
+      return false;
+    }
+    /** respect a user provided onShouldStartLoadWithRequest */
+    if (webViewProps && webViewProps.onShouldStartLoadWithRequest) {
+      return webViewProps.onShouldStartLoadWithRequest(request);
+    }
+    return true;
+  };
+
+  /**
+   * Called every time the URL starts to load in the WebView.
+   *
+   * Handles completing the checkout session - acts as a fallback for platforms
+   * where `onShouldStartLoadWithRequest` is not invoked for the redirect.
    */
   const _onLoadStart = (syntheticEvent: SyntheticEvent) => {
     const { nativeEvent } = syntheticEvent;
     const { url: currentUrl } = nativeEvent;
-    /** Check and handle checkout state: success */
-    if (currentUrl.includes('sc_checkout=success')) {
-      const checkoutSessionIdKey = 'sc_sid=';
-      const checkoutSessionId = currentUrl
-        .substring(currentUrl.indexOf(checkoutSessionIdKey), currentUrl.length)
-        /** remove key */
-        .replace(checkoutSessionIdKey, '')
-        /** remove extra trailing slash */
-        .replace('/', '');
-      setCompleted(true);
-      if (onSuccess) {
-        onSuccess({ ...props, checkoutSessionId });
-      }
-      return;
-    }
-    /** Check and handle checkout state: cancel */
-    if (currentUrl.includes('sc_checkout=cancel')) {
-      setCompleted(true);
-      if (onCancel) {
-        onCancel(props);
-      }
-    }
+    _handleCompletionUrl(currentUrl);
     /** call webViewProps.onLoadStart */
     if (webViewProps && webViewProps.onLoadStart) {
       webViewProps.onLoadStart(syntheticEvent);
@@ -160,6 +206,7 @@ const StripeCheckoutWebView = (props: Props) => {
         baseUrl: 'https://stripe.com',
         ...webViewProps?.source,
       }}
+      onShouldStartLoadWithRequest={_onShouldStartLoadWithRequest}
       onLoadStart={_onLoadStart}
       onLoadEnd={_onLoadEnd}
     />

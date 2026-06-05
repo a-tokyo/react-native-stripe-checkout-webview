@@ -7,6 +7,7 @@ exports[`<StripeCheckout /> renders props correctly - extra props 1`] = `
   javaScriptEnabled={true}
   onLoadEnd={[Function]}
   onLoadStart={[Function]}
+  onShouldStartLoadWithRequest={[Function]}
   originWhitelist={
     Array [
       "*",
@@ -77,6 +78,7 @@ exports[`<StripeCheckout /> renders props correctly - options 1`] = `
   javaScriptEnabled={true}
   onLoadEnd={[Function]}
   onLoadStart={[Function]}
+  onShouldStartLoadWithRequest={[Function]}
   originWhitelist={
     Array [
       "*",
@@ -147,6 +149,7 @@ exports[`<StripeCheckout /> renders props correctly - webViewProps 1`] = `
   javaScriptEnabled={true}
   onLoadEnd={[Function]}
   onLoadStart={[Function]}
+  onShouldStartLoadWithRequest={[Function]}
   originWhitelist={
     Array [
       "https://stripe.com",
@@ -217,6 +220,7 @@ exports[`<StripeCheckout /> renders props correctly 1`] = `
   javaScriptEnabled={true}
   onLoadEnd={[Function]}
   onLoadStart={[Function]}
+  onShouldStartLoadWithRequest={[Function]}
   originWhitelist={
     Array [
       "*",

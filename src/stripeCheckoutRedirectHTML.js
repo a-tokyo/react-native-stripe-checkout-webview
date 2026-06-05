@@ -7,15 +7,15 @@ const stripeCheckoutRedirectHTML = (
   stripe_public_key: string,
   input:
     | {
+        /**
+         * Server-side Checkout Session flow.
+         * Only `sessionId` is forwarded to `stripe.redirectToCheckout`.
+         * Everything else (`successUrl`, `cancelUrl`, `locale`, ...) must be
+         * configured when creating the Checkout Session server-side.
+         * `locale`, if provided, is additionally used as a client-side hint via
+         * the Stripe.js constructor.
+         */
         sessionId: string,
-        successUrl: string,
-        cancelUrl: string,
-        // common
-        customerEmail?: string,
-        billingAddressCollection?: 'required' | 'auto',
-        shippingAddressCollection?: {
-          allowedCountries: Array<string>,
-        },
         locale?: string,
       }
     | {
@@ -57,6 +57,33 @@ const stripeCheckoutRedirectHTML = (
     htmlContentHead = '',
   } = options || {};
 
+  /**
+   * Build the input passed to `stripe.redirectToCheckout`.
+   *
+   * When a server-side Checkout Session is used, Stripe.js only accepts
+   * `{ sessionId }` - passing any other field (eg: `locale`, `successUrl`)
+   * makes Stripe.js reject the call and the checkout never loads.
+   * See https://github.com/a-tokyo/react-native-stripe-checkout-webview/issues/108
+   *
+   * For the session flow, all other settings (including `locale`) must be set
+   * server-side when creating the Checkout Session. For the client-only flow
+   * (lineItems/items) the full input - including `locale` - is forwarded.
+   *
+   * `'sessionId' in input` is used so Flow can narrow the union before reading
+   * `input.sessionId` (it does not exist on the client-only member).
+   */
+  const redirectToCheckoutInput =
+    'sessionId' in input ? { sessionId: input.sessionId } : input;
+
+  /**
+   * `locale` is applied at the Stripe.js constructor level so it can localize
+   * Checkout (and error strings) even when using a server-side session, where
+   * `locale` cannot be passed to `redirectToCheckout`.
+   */
+  const stripeConstructorOptions = input.locale
+    ? { locale: input.locale }
+    : null;
+
   /** Return html */
   return `
   <html>
@@ -78,11 +105,15 @@ const stripeCheckoutRedirectHTML = (
       <!-- Stripe execution script -->
       <script>
         (function initStripeAndRedirectToCheckout () {
-          const stripe = Stripe('${stripe_public_key}');
+          const stripe = Stripe('${stripe_public_key}'${
+            stripeConstructorOptions
+              ? `, ${JSON.stringify(stripeConstructorOptions)}`
+              : ''
+          });
           window.onload = () => {
             console.log('RNSC: window loaded');
             // Redirect to Checkout
-            stripe.redirectToCheckout(${JSON.stringify(input)})
+            stripe.redirectToCheckout(${JSON.stringify(redirectToCheckoutInput)})
             .then((result) => {
                 console.log('RNSC: window loaded', result);
                 // Remove loading html
