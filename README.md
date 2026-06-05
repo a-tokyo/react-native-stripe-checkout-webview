@@ -77,18 +77,13 @@ export default MyStripeCheckout;
 - `stripePublicKey` (String) - Stripe public key of your project.
 - `checkoutSessionInput` (Object) - Object to be passed to Stripe's `redirectToCheckout` function. [Docs](https://stripe.com/docs/js/checkout/redirect_to_checkout).
   - ```js
+    // Server-side Checkout Session flow
     {
       sessionId: string,
-      successUrl: string,
-      cancelUrl: string,
-      // common
-      customerEmail?: string,
-      billingAddressCollection?: 'required' | 'auto',
-      shippingAddressCollection?: {
-        allowedCountries: Array<string>,
-      },
+      // optional client-side locale hint - see "A note on locale" below
       locale?: string,
     }
+    // Client-only flow
     | {
         clientReferenceId: string,
         successUrl: string,
@@ -106,8 +101,9 @@ export default MyStripeCheckout;
         locale?: string,
       }
     ```
+  - **When using `sessionId`, only `sessionId` is forwarded to Stripe's `redirectToCheckout`.** Stripe.js rejects the call if any other field (`successUrl`, `cancelUrl`, `locale`, ...) is passed alongside `sessionId`, which would prevent Checkout from loading. Configure those options when you create the Checkout Session server-side instead.
 - `onSuccess` (?Function) - Called upon success of the checkout session with `{ ...props, checkoutSessionId: 'CHECKOUT_SESSION_ID' }`
-- `onCancel` (?Function) - Called upon success of the checkout session with `{ ...props }`
+- `onCancel` (?Function) - Called upon cancellation of the checkout session with `{ ...props }`
 - `onLoadingComplete` (?Function) - Called when the Stripe checkout session webpage loads successfully.
 - `options` (?Object) - custom options to display content in the webview
   - `htmlContentLoading` (String) - Html string to display a loading indication. - default: `<h1 id="sc-loading">Loading...</h1>` - note: The loading item is set on the element with id='sc-loading'
@@ -115,6 +111,15 @@ export default MyStripeCheckout;
   - `htmlContentHead` (String) - Html string to inject in head. - default: ''
 - `webViewProps` (?Object) - WebView Component props, spread on the WebView Component.
 - `renderOnComplete` (?(props) => React$Node) - Optional rendering function returning a component to display upon checkout completion. note: You don't need this if your onSuccess and onCancel functions navigate away from the component.
+
+
+## A note on locale
+- **Client-only flow** (`lineItems`/`items`): pass `locale` directly in `checkoutSessionInput` - it is forwarded to `redirectToCheckout`.
+- **Server-side Checkout Session flow** (`sessionId`): the displayed language is determined by the `locale` you set when **creating the Checkout Session server-side** - this is the authoritative source. Stripe.js does not accept `locale` alongside `sessionId`, so it is not forwarded to `redirectToCheckout` (doing so would prevent Checkout from loading). As a convenience, a `locale` passed in `checkoutSessionInput` is still applied as a client-side hint via the Stripe.js constructor (`Stripe(key, { locale })`), which localizes error strings.
+
+
+## Avoiding a 404 on success / cancel
+- The library intercepts the `successUrl`/`cancelUrl` redirect via the WebView's `onShouldStartLoadWithRequest` and **prevents the WebView from navigating to it**, then calls `onSuccess`/`onCancel`. This means your `successUrl`/`cancelUrl` can be a placeholder that does not resolve to a real page - the WebView will never render its (potentially 404) content. Just make sure the URLs follow the [structure above](#important-notes-about-urls).
 
 
 ## Apple Pay and Google Pay
